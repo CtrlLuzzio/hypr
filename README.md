@@ -1,0 +1,2 @@
+# hypr
+Personal Hyprland config
