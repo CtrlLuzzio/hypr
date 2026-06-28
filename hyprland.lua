@@ -51,7 +51,7 @@ local menu        = "fuzzel"
 hl.on("hyprland.start", function ()
   hl.exec_cmd("awww-daemon")
   hl.exec_cmd("swaync")
-  hl.exec_cmd("waybar -c ~/nixos-dotfiles/config/waybar/config-ext.jsonc")
+  hl.exec_cmd("waybar -c ~/.config/waybar/config-ext.jsonc")
   hl.exec_cmd("steam")
   hl.exec_cmd("flatpak run com.discordapp.Discord")
   hl.exec_cmd("ferdium")
