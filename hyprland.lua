@@ -288,7 +288,7 @@ hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("zen")) -- Browser
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("~/.config/waybar/scripts/reboot.sh"))
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("sh -c 'grim -l 0 -g \"$(slurp)\" - | wl-copy'"))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("bash -c 'wayfreeze & PID=$!; sleep 0.1; AREA=$(slurp); [ -z \"$AREA\" ] && { kill $PID; exit 1; }; exec 3< <(grim -g \"$AREA\" -); kill $PID; satty --filename - <&3; exec 3<&-'"))
 hl.bind(secondaryMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
 hl.bind(secondaryMod .. " + A", hl.dsp.window.fullscreen({ mode = 1, action = "toggle" }))
 
