@@ -32,3 +32,9 @@ hl.window_rule({
     no_shadow = true,
     border_size = 0
 })
+hl.window_rule({
+    name = "keep-sf6-focused",
+    match = { title = "Street Fighter 6" },
+    idle_inhibit = "always",
+    render_unfocused = true
+})
