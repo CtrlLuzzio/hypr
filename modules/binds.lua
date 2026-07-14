@@ -1,8 +1,8 @@
 -- https://wiki.hypr.land/Configuring/Basics/Binds/
-local terminal    = "foot"
+local terminal = "foot"
 local fileManager = "thunar"
-local menu        = "fuzzel"
-local browser     = "zen"
+local menu = "rofi -show drun"
+local browser = "zen" --Zen Browser binary name in NixOS
 local mainMod = "SUPER"
 local secondaryMod = "ALT"
 
@@ -15,7 +15,7 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 -- hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
-hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"))
+hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("cliphist list | rofi -dmenu | cliphist decode | wl-copy"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("~/.config/waybar/scripts/reboot.sh"))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("bash -c 'wayfreeze & PID=$!; sleep 0.1; AREA=$(slurp); [ -z \"$AREA\" ] && { kill $PID; exit 1; }; exec 3< <(grim -g \"$AREA\" -); kill $PID; satty --filename - <&3; exec 3<&-'"))
