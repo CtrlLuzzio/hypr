@@ -2,29 +2,34 @@
 local terminal = "foot"
 local fileManager = "thunar"
 local menu = "rofi -show drun"
-local browser = "zen" --Zen Browser binary name in NixOS
+local browser = "zen-browser" --Zen Browser binary name in Arch
 local mainMod = "SUPER"
 local secondaryMod = "ALT"
 
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
--- hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(secondaryMod .. " + backslash", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
--- hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
+hl.bind(secondaryMod .. "+ SHIFT + Return", hl.dsp.layout("togglesplit"))    -- dwindle only
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("cliphist list | rofi -dmenu | cliphist decode | wl-copy"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("~/.config/waybar/scripts/reboot.sh"))
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("bash -c 'wayfreeze & PID=$!; sleep 0.1; AREA=$(slurp); [ -z \"$AREA\" ] && { kill $PID; exit 1; }; exec 3< <(grim -g \"$AREA\" -); kill $PID; satty --filename - <&3; exec 3<&-'"))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("bash -c 'wayfreeze & PID=$!; sleep 0.1; AREA=$(slurp); [ -z \"$AREA\" ] && { kill $PID; exit 1; }; sleep 0.15;exec 3< <(grim -g \"$AREA\" -); kill $PID; satty --filename - <&3; exec 3<&-'"))
 hl.bind(secondaryMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
 hl.bind(secondaryMod .. " + A", hl.dsp.window.fullscreen({ mode = 1, action = "toggle" }))
+
 hl.bind(mainMod .. " + H",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + K",    hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + J",  hl.dsp.focus({ direction = "down" }))
+
+hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.swap({ direction = "left" }))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.swap({ direction = "right" }))
+hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.swap({ direction = "up" }))
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.swap({ direction = "down" }))
 
 for i = 1, 10 do
     local key = i % 10
@@ -32,8 +37,13 @@ for i = 1, 10 do
     hl.bind(secondaryMod .. " + " .. key,     hl.dsp.window.move({ workspace = i }))
 end
 
-hl.bind(mainMod .. " + T",         hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + T", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(mainMod .. " + comma",  hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(mainMod .. " + period", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind("CTRL + comma",  hl.dsp.window.move({ workspace = "e-1" }))
+hl.bind("CTRL + period", hl.dsp.window.move({ workspace = "e+1" }))
+
+hl.bind(secondaryMod .. " + Z", hl.dsp.workspace.toggle_special("magic"))
+hl.bind(secondaryMod .. " + SHIFT + Z", hl.dsp.window.move({ workspace = "special:magic" }))
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
