@@ -1,13 +1,15 @@
 -- https://wiki.hypr.land/Configuring/Basics/Variables/
 -- https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
+local colors = require("modules.colors")
+
 hl.config({
     general = {
         gaps_in  = 5,
-        gaps_out = 5,
-        border_size = 3,
+        gaps_out = 10,
+        border_size = 2,
         col = {
-            active_border   = "rgba(cba6f7ee)",
-            inactive_border = "rgba(1e1e2eaa)",
+            active_border   = colors.active,
+            inactive_border = colors.inactive,
         },
         resize_on_border = false,
         allow_tearing = false,
@@ -15,8 +17,8 @@ hl.config({
     },
 
     decoration = {
-        rounding       = 0,
-        rounding_power = 0,
+        rounding       = 10,
+        rounding_power = 4,
         active_opacity   = 1.0,
         inactive_opacity = 1.0,
         shadow = {
